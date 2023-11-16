@@ -48,7 +48,7 @@ os.system('clear')
 banner()
 chats = []
 last_date = None
-chunk_size = 200
+chunk_size = 2000
 groups=[]
  
 result = client(GetDialogsRequest(
@@ -62,8 +62,8 @@ chats.extend(result.chats)
  
 for chat in chats:
     try:
-        if chat.megagroup== True:
-            groups.append(chat)
+        # if chat.megagroup== True:
+        groups.append(chat)
     except:
         continue
  
