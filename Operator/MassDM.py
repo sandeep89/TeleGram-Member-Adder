@@ -68,7 +68,11 @@ class main():
         print(gr+"[1] send sms by user ID\n[2] send sms by username ")
         mode = int(input(gr+"Input : "+re))
          
-        message = input(gr+"[+] Enter Your Message : "+re)
+        # message = input(gr+"[+] Enter Your Message : "+re)
+        text_file = open("./message/message.txt", "r")
+        data = text_file.read()
+        image_file = "./message/photo.jpg"
+        text_file.close()
          
         for user in users:
             if mode == 2:
@@ -83,7 +87,9 @@ class main():
                 sys.exit()
             try:
                 print(gr+"[+] Sending Message to:", user['name'])
-                client.send_message(receiver, message.format(user['name']))
+                # client.send_message(receiver, message.format(user['name']))
+                client.parse_mode = 'html'
+                client.send_message(receiver, data, file=image_file)
                 print(gr+"[+] Waiting {} seconds".format(SLEEP_TIME))
                 time.sleep(SLEEP_TIME)
             except PeerFloodError:
